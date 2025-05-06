@@ -4,8 +4,36 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+one:
+  {
+    title: "book1",
+    author: "author1",
+    description: "description1",
+    cover_image_url: "http://example.com/cover1.jpg",
+    page_count: 100,
+    price: 1500,
+    availability: True,
+    rating: 4.5,
+    reviews_count: 10,
+    published_date: "2023-01-01",
+    created_at: "2023-01-01 00:00:00",
+    updated_at: "2023-01-01 00:00:00",
+  }
 # column: value
 #
-two: {}
+two:
+  {
+    title: "book2",
+    author: "author2",
+    description: "description2",
+    cover_image_url: "http://example.com/cover2.jpg",
+    page_count: 100,
+    price: 1500,
+    availability: True,
+    rating: 4.5,
+    reviews_count: 10,
+    published_date: "2023-05-01",
+    created_at: "2025-01-01 00:00:00",
+    updated_at: "2025-01-01 00:00:00",
+  }
 # column: value
