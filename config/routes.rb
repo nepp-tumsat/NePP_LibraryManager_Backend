@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  namespace :api do
-    namespace :v1 do
-      resources :books, only: [:index, :show, :create, :update, :destroy]
+  # Define the root path
+  root 'hello#index'
+  resources :books, only: [:index]
 end
