@@ -14,6 +14,7 @@ class ChangeReviewsCountAndAvailabilityInBooks < ActiveRecord::Migration[7.1]
   def migrate_up
     change_reviews_count_up
     change_availability_up
+    enforce_title_constraints_up # ← 追加
   end
 
   def change_reviews_count_up
@@ -37,10 +38,27 @@ class ChangeReviewsCountAndAvailabilityInBooks < ActiveRecord::Migration[7.1]
     change_column_null :books, :availability, false
   end
 
+  def enforce_title_constraints_up
+    execute <<~SQL.squish
+      UPDATE books
+      SET title = 'Untitled'
+      WHERE title IS NULL OR length(btrim(title)) = 0;
+    SQL
+
+    # 空白のみ禁止のCHECK
+    add_check_constraint :books,
+                         'length(btrim(title)) > 0',
+                         name: 'books_title_not_blank'
+
+    # NOT NULL 付与
+    change_column_null :books, :title, false
+  end
+
   # ---- down side ----
   def migrate_down
     change_reviews_count_down
     change_availability_down
+    enforce_title_constraints_down # ← 追加
   end
 
   def change_reviews_count_down
@@ -53,5 +71,10 @@ class ChangeReviewsCountAndAvailabilityInBooks < ActiveRecord::Migration[7.1]
     change_column_null :books, :availability, true
     change_column_default :books, :availability, from: true, to: nil
     change_column :books, :availability, :text
+  end
+
+  def enforce_title_constraints_down
+    change_column_null :books, :title, true
+    remove_check_constraint :books, name: 'books_title_not_blank'
   end
 end
