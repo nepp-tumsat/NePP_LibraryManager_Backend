@@ -54,11 +54,13 @@ gem 'rack-cors'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem 'brakeman', require: false
+  gem 'bundler-audit', require: false
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
-  gem 'rubocop', require: false         # 本体（v1系でOK）
+  gem 'rubocop', '>= 1.75', require: false # 本体（v1系でOK）
   gem 'rubocop-performance', require: false
-  gem 'rubocop-rails', require: false   # Rails向けCop
+  gem 'rubocop-rails', require: false # Rails向けCop
 end
 
 group :development do
@@ -78,6 +80,8 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
-  gem 'selenium-webdriver'
-  gem 'webdrivers'
+  gem 'selenium-webdriver', '>= 4.11'
 end
+
+gem 'fiddle'
+gem 'ostruct'
