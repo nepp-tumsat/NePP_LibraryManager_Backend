@@ -1,3 +1,8 @@
+# frozen_string_literal: true
+
+# rubocop:disable Metrics/MethodLength
+# rubocop:disable Rails/ThreeStateBooleanColumn
+# rubocop導入時にはすでに失敗していたので、無効化しておき、別ファイルで直すようにする
 class CreateBooks < ActiveRecord::Migration[7.1]
   def change
     create_table :books do |t|
@@ -15,3 +20,6 @@ class CreateBooks < ActiveRecord::Migration[7.1]
     end
   end
 end
+
+# rubocop:enable Rails/ThreeStateBooleanColumn
+# rubocop:enable Metrics/MethodLength
