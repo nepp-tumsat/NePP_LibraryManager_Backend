@@ -85,3 +85,6 @@ end
 
 gem 'fiddle'
 gem 'ostruct'
+gem "nokogiri", ">= 1.18.9"
+gem "rack-session", ">= 2.1.1"
+gem "thor", ">= 1.4.0"
