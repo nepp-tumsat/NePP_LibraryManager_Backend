@@ -1,31 +1,17 @@
 {
-  "image": "mcr.microsoft.com/devcontainers/ruby:3",
-  "hostRequirements": {
-    "cpus": 4
-  },
-  "waitFor": "onCreateCommand",
-  "updateContentCommand": "bundle install",
-  "postCreateCommand": "",
-  "postAttachCommand": {
-    "server": "rails server"
-  },
+  "name": "NePP_Library_Manager_Backend",
+  "dockerComposeFile": ["docker-compose.yml"],
+  "service": "web",
+  // 自分が作業する場所を指定する
+  "workspaceFolder": "/workspaces/rails_app",
+  // コンテナ内で使う拡張機能
   "customizations": {
-    "codespaces": {
-      "openFiles": [
-        "app/views/hello/index.html.erb"
-      ]
-    },
     "vscode": {
       "extensions": [
-        "Shopify.ruby-lsp"
+        "Shopify.ruby-lsp",
+        "misogi.ruby-rubocop",
+        "ms-azuretools.vscode-docker"
       ]
     }
-  },
-  "portsAttributes": {
-    "3000": {
-      "label": "Application",
-      "onAutoForward": "openPreview"
-    }
-  },
-  "forwardPorts": [3000]
+  }
 }

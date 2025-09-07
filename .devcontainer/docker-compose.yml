@@ -1,0 +1,24 @@
+services:
+  db:
+    image: postgres
+    env_file:
+      - ../.env
+    volumes:
+      - .:/myapp
+      
+  web:
+    env_file:
+      - ../.env
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ..:/workspaces/rails_app:cached
+    command: sleep infinity # 開発コンテナが勝手にダウンしない為に設定する
+    ports:
+      - 3306:3306
+    depends_on:
+      - db
+
+volumes:
+  db-store:
