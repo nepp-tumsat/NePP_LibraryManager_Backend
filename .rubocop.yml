@@ -1,0 +1,21 @@
+plugins:
+  - rubocop-rails
+  - rubocop-performance
+
+AllCops:
+  NewCops: enable
+  # TargetRubyVersion は .ruby-version / Gemfile から自動推定に任せる
+  Exclude:
+    - "bin/**/*"
+    - "db/schema.rb"
+    - "node_modules/**/*"
+    - "vendor/**/*"
+
+Layout/LineLength:
+  Max: 120
+Style/Documentation:
+  Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    - "test/**/*"
+    - "spec/**/*"

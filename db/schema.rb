@@ -10,20 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_05_04_162729) do
+ActiveRecord::Schema[7.2].define(version: 2025_09_05_134623) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "books", force: :cascade do |t|
-    t.string "title"
+    t.string "title", null: false
     t.string "author"
     t.text "description"
     t.string "cover_image_url"
     t.integer "page_count"
     t.integer "price"
-    t.boolean "availability"
+    t.boolean "availability", default: true, null: false
     t.float "rating"
-    t.string "reviews_count"
+    t.integer "reviews_count", default: 0, null: false
     t.date "published_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.check_constraint "length(btrim(title::text)) > 0", name: "books_title_not_blank"
   end
-
 end
