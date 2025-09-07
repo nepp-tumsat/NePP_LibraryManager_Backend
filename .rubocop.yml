@@ -1,11 +1,9 @@
-require:
+plugins:
   - rubocop-rails
   - rubocop-performance
-# RSpec使うなら↓も（入れていれば）
-#  - rubocop-rspec
 
 AllCops:
-  NewCops: enable              # 新しいCopは基本オン
+  NewCops: enable
   # TargetRubyVersion は .ruby-version / Gemfile から自動推定に任せる
   Exclude:
     - "bin/**/*"
@@ -13,7 +11,6 @@ AllCops:
     - "node_modules/**/*"
     - "vendor/**/*"
 
-# 好みの軽い調整（例）
 Layout/LineLength:
   Max: 120
 Style/Documentation:

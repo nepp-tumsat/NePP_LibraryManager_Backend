@@ -84,9 +84,9 @@ group :test do
 end
 
 gem 'fiddle'
+gem 'nokogiri', '>= 1.18.9'
 gem 'ostruct'
-gem "nokogiri", ">= 1.18.9"
-gem "rack-session", ">= 2.1.1"
-gem "thor", ">= 1.4.0"
+gem 'rack-session', '>= 2.1.1'
+gem 'thor', '>= 1.4.0'
 # Security floor pins
 gem 'net-imap', '>= 0.4.20'
