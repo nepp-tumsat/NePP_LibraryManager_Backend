@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.4.5'
+ruby '3.4.7'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.2', '>= 7.2.2.2'
@@ -64,21 +64,15 @@ group :development, :test do
 end
 
 group :development do
-  gem 'solargraph'
-
   gem 'erb_lint'
-
-  # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
-  # gem "rack-mini-profiler"
-
-  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
-
+  gem 'solargraph'
   gem 'hotwire-livereload', '~> 1.2'
+  gem 'ruby-lsp-rails'
+  gem 'ruby-lsp'
+  gem 'syntax_tree'
 end
 
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
   gem 'selenium-webdriver', '>= 4.11'
 end
