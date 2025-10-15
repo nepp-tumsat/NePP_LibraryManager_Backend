@@ -34,6 +34,4 @@ RUN git clone https://github.com/rbenv/rbenv.git "${RBENV_ROOT}" && \
     "${RBENV_ROOT}/bin/rbenv" rehash
 
 WORKDIR /workspaces/rails_app
-
-# bundler のインストール先をローカルに（フルパスで呼ぶ）
 RUN "${RBENV_ROOT}/versions/${RUBY_VERSION}/bin/bundle" config set --local path vendor/bundle
