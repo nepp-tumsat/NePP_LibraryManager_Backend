@@ -8,9 +8,7 @@ NePP で管理している図書が、人の手では管理することが難し
 
 フレームワーク：Ruby on rails
 
-DB:postgresql(本番環境)
-
-sqlite(開発環境・テスト環境)
+DB:postgresql
 
 ## 環境構築
 
@@ -18,7 +16,7 @@ git でこのリポジトリをクローン後、Docker を立ち上げ、VSCode
 
 開発環境に入ったら、
 
-bin/setup
+bin/setup (初回実行時のみ必須)
 
 rails s
 
