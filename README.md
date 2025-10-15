@@ -1,8 +1,12 @@
 # NePP_Library_Manager_backend
 
+フロント側 ↓
+
+https://github.com/nepp-tumsat/NePP_LibraryManager_Front
+
 ### なぜ作ったのか
 
-NePP で管理している図書が、人の手では管理することが難しくなったので、システムを構築し、アプリで管理できるようにしたいため、作成しました。
+NePP で管理している図書が、人の手では管理することが難しくなったので、システムを構築し、アプリで管理できるようにしたいため作成しました。
 
 ## 使用技術
 
@@ -30,8 +34,10 @@ rails s
 
 ## 工夫した点・苦労した点
 
-環境構築でつまづき(Dockerfile, docker-compose.yml を用いた)、結局 template の内容を引っ張ってきました
+Dockerfile, docker-compose.yml を用いた環境構築でつまづき、結局 template の内容を引っ張ってきて、devcontainer で動かすようにしました
 
 #### API サーバー DB サーバーの準備
 
 無料で利用でき、かつデプロイ状態がずっと続くサービスが見当たらず、苦戦しました。
+
+また、サーバーや DB の制限の中、無料で利用するために Storage サービスを使用し、バックエンドでは supabase、フロントエンドでそれぞれ別のホスティングサービスを使用しています
