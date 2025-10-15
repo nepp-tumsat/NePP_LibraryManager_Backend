@@ -65,10 +65,10 @@ end
 
 group :development do
   gem 'erb_lint'
-  gem 'solargraph'
   gem 'hotwire-livereload', '~> 1.2'
-  gem 'ruby-lsp-rails'
   gem 'ruby-lsp'
+  gem 'ruby-lsp-rails'
+  gem 'solargraph'
   gem 'syntax_tree'
 end
 
