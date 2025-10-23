@@ -2,16 +2,25 @@
   "name": "NePP_Library_Manager_Backend",
   "dockerComposeFile": ["docker-compose.yml"],
   "service": "web",
-  // 自分が作業する場所を指定する
   "workspaceFolder": "/workspaces/rails_app",
-  // コンテナ内で使う拡張機能
+  "remoteEnv": {
+    "RBENV_ROOT": "/home/vscode/.rbenv",
+    "PATH": "/home/vscode/.rbenv/bin:/home/vscode/.rbenv/shims:${containerEnv:PATH}"
+  },
   "customizations": {
     "vscode": {
       "extensions": [
         "Shopify.ruby-lsp",
         "misogi.ruby-rubocop",
         "ms-azuretools.vscode-docker"
-      ]
+      ],
+      "settings": {
+        "rubyLsp.useBundler": true,
+        "rubyLsp.rubyVersionManager": "rbenv",
+        "rubyLsp.bundleGemfile": "${containerWorkspaceFolder}/Gemfile",
+        "rubyLsp.logging.level": "debug"
+      }
     }
-  }
+  },
+  "forwardPorts": [3000, 5432]
 }

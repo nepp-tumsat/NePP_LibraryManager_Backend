@@ -1,5 +1,6 @@
 # NePP_Library_Manager_backend
-フロント側↓
+
+フロント側 ↓
 
 https://github.com/nepp-tumsat/NePP_LibraryManager_Front
 
@@ -11,7 +12,7 @@ NePP で管理している図書が、人の手では管理することが難し
 
 フレームワーク：Ruby on rails
 
-DB:postgresql(本番環境)
+DB:postgresql
 
 ## 環境構築
 
@@ -19,7 +20,7 @@ git でこのリポジトリをクローン後、Docker を立ち上げ、VSCode
 
 開発環境に入ったら、
 
-bin/setup
+bin/setup (初回実行時のみ必須)
 
 rails s
 
@@ -33,10 +34,10 @@ rails s
 
 ## 工夫した点・苦労した点
 
-Dockerfile, docker-compose.yml を用いた環境構築でつまづき、結局 template の内容を引っ張ってきて、devcontainerで動かすようにしました
+Dockerfile, docker-compose.yml を用いた環境構築でつまづき、結局 template の内容を引っ張ってきて、devcontainer で動かすようにしました
 
 #### API サーバー DB サーバーの準備
 
 無料で利用でき、かつデプロイ状態がずっと続くサービスが見当たらず、苦戦しました。
 
-また、サーバーやDBの制限の中、無料で利用するためにStorageサービスを使用し、バックエンドではsupabase、フロントエンドでそれぞれ別のホスティングサービスを使用しています
+また、サーバーや DB の制限の中、無料で利用するために Storage サービスを使用し、バックエンドでは supabase、フロントエンドでそれぞれ別のホスティングサービスを使用しています
