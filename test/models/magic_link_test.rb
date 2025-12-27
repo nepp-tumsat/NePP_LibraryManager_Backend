@@ -17,7 +17,7 @@ class MagicLinkTest < ActiveSupport::TestCase
     assert magic_link.expires_at > Time.current
   end
 
-  test 'consume returns user and marks token used' do
+  test 'consume! returns user and marks token used' do
     user = User.create!(email: 'consume@example.com')
     raw_token = MagicLink.issue_for(user)
 
@@ -27,15 +27,15 @@ class MagicLinkTest < ActiveSupport::TestCase
     assert magic_link.used_at.present?
   end
 
-  test 'consume returns nil for blank token' do
+  test 'consume! returns nil for blank token' do
     assert_nil MagicLink.consume!('')
   end
 
-  test 'consume returns nil for non-existent token' do
+  test 'consume! returns nil for non-existent token' do
     assert_nil MagicLink.consume!('missing-token')
   end
 
-  test 'consume returns nil for expired token' do
+  test 'consume! returns nil for expired token' do
     user = User.create!(email: 'expired@example.com')
     raw_token = MagicLink.issue_for(user)
 
@@ -44,7 +44,7 @@ class MagicLinkTest < ActiveSupport::TestCase
     end
   end
 
-  test 'consume returns nil when token already used' do
+  test 'consume! returns nil when token already used' do
     user = User.create!(email: 'used@example.com')
     raw_token = MagicLink.issue_for(user)
 

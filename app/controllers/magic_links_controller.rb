@@ -33,7 +33,7 @@ class MagicLinksController < ApplicationController
   end
 
   def normalized_email
-    params.require(:email).to_s.strip.downcase
+    User.normalize_email(params.require(:email))
   end
 
   def send_login_link!(email)

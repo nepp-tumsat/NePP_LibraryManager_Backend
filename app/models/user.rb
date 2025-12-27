@@ -9,9 +9,13 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
+  def self.normalize_email(value)
+    value.to_s.strip.downcase.presence
+  end
+
   private
 
   def normalize_email
-    self.email = email.to_s.strip.downcase.presence
+    self.email = self.class.normalize_email(email)
   end
 end

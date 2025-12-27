@@ -14,6 +14,10 @@ cookie_domain =
       nil
     end.uniq
 
+    if hosts.size > 1
+      Rails.logger.warn('[session_store] Multiple FRONTEND_URL hosts detected; set SESSION_DOMAIN to share cookies.')
+    end
+
     hosts.first if hosts.size == 1
   end
 
