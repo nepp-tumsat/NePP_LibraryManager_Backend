@@ -1,7 +1,7 @@
 {
   "name": "NePP_Library_Manager_Backend",
   "dockerComposeFile": ["docker-compose.yml"],
-  "service": "web",
+  "service": "app",
   "workspaceFolder": "/workspaces/rails_app",
   "remoteEnv": {
     "RBENV_ROOT": "/home/vscode/.rbenv",
@@ -22,5 +22,5 @@
       }
     }
   },
-  "forwardPorts": [3000, 5432]
+  "forwardPorts": [3000, 5432, 8025]
 }

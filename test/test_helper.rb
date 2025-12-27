@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 ENV['RAILS_ENV'] ||= 'test'
+ENV['FRONTEND_URL'] = 'http://frontend.test'
+ENV['FRONTEND_AUTH_FAILURE_URL'] = 'http://frontend.test/failure'
+
 require_relative '../config/environment'
 require 'rails/test_help'
 
