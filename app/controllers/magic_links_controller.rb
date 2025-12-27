@@ -4,13 +4,16 @@ class MagicLinksController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :create
 
   def show
-    user = consume_user
+    token = token_param
+    return redirect_to_failure unless valid_token_param?(token)
+
+    user = consume_user(token)
     return redirect_to_failure unless user
 
     login_user!(user)
     redirect_to success_url, allow_other_host: true
   rescue StandardError => e
-    Rails.logger.error("[magic_link] #{e.class}: #{e.message}")
+    Rails.logger.error(e.full_message)
     redirect_to_failure
   end
 
@@ -28,8 +31,16 @@ class MagicLinksController < ApplicationController
 
   private
 
-  def consume_user
-    MagicLink.consume!(params[:id].to_s)
+  def consume_user(token)
+    MagicLink.consume!(token)
+  end
+
+  def token_param
+    params[:id].to_s
+  end
+
+  def valid_token_param?(token)
+    token.present? && token.length <= 200 && /\A[a-zA-Z0-9\-_]+\z/.match?(token)
   end
 
   def normalized_email
@@ -60,8 +71,20 @@ class MagicLinksController < ApplicationController
     redirect_to failure_url, allow_other_host: true
   end
 
+  def frontend_urls
+    raw = if Rails.env.production?
+            ENV.fetch('FRONTEND_URL')
+          else
+            ENV.fetch('FRONTEND_URL', '')
+          end
+    urls = raw.split(',').map(&:strip).reject(&:empty?)
+    raise 'FRONTEND_URL is required in production' if Rails.env.production? && urls.empty?
+
+    urls
+  end
+
   def success_url
-    ENV.fetch('FRONTEND_URL', '/')
+    frontend_urls.first || '/'
   end
 
   def failure_url

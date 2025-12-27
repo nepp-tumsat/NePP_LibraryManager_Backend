@@ -8,7 +8,10 @@ class ApplicationController < ActionController::Base
   private
 
   def set_csrf_cookie
-    cookies['CSRF-TOKEN'] = form_authenticity_token if protect_against_forgery?
+    return unless protect_against_forgery?
+    return unless request.get? || request.head?
+
+    cookies['CSRF-TOKEN'] = form_authenticity_token
   end
 
   def current_user
