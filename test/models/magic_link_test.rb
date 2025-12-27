@@ -31,6 +31,10 @@ class MagicLinkTest < ActiveSupport::TestCase
     assert_nil MagicLink.consume!('')
   end
 
+  test 'consume returns nil for non-existent token' do
+    assert_nil MagicLink.consume!('missing-token')
+  end
+
   test 'consume returns nil for expired token' do
     user = User.create!(email: 'expired@example.com')
     raw_token = MagicLink.issue_for(user)

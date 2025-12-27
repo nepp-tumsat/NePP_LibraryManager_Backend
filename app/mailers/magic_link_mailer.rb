@@ -2,7 +2,6 @@
 
 class MagicLinkMailer < ApplicationMailer
   def login_link(user:, token:)
-    @user = user
     base = ENV.fetch('MAGIC_LINK_URL_BASE', 'http://localhost:3000').delete_suffix('/')
     @login_url = "#{base}/magic_links/#{token}"
 

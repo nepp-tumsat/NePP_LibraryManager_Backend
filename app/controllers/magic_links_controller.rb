@@ -39,7 +39,7 @@ class MagicLinksController < ApplicationController
   def send_login_link!(email)
     user = User.find_or_create_by!(email: email)
     raw_token = MagicLink.issue_for(user)
-    MagicLinkMailer.login_link(user:, token: raw_token).deliver_now
+    MagicLinkMailer.login_link(user:, token: raw_token).deliver_later
   end
 
   def render_email_required

@@ -12,7 +12,7 @@ allowed_origins =
     cors_origins.any? ? cors_origins : ['http://localhost:5173']
   end
 
-allow_credentials = allowed_origins != ['*']
+allow_credentials = allowed_origins.exclude?('*')
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do

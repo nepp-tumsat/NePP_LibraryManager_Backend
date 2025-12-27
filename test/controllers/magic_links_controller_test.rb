@@ -3,15 +3,18 @@
 require 'test_helper'
 
 class MagicLinksControllerTest < ActionDispatch::IntegrationTest
+  include ActiveJob::TestHelper
+
   test 'creates magic link and sends email' do
     ActionMailer::Base.deliveries.clear
 
-    assert_difference(['User.count', 'MagicLink.count']) do
-      post magic_links_url, params: { email: 'new-user@example.com' }, as: :json
+    perform_enqueued_jobs do
+      assert_difference(['User.count', 'MagicLink.count', 'ActionMailer::Base.deliveries.size']) do
+        post magic_links_url, params: { email: 'new-user@example.com' }, as: :json
+      end
     end
 
     assert_response :accepted
-    assert_equal 1, ActionMailer::Base.deliveries.size
     assert_equal ['new-user@example.com'], ActionMailer::Base.deliveries.last.to
   end
 
@@ -22,6 +25,15 @@ class MagicLinksControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :unprocessable_entity
     assert_equal 'email_required', response.parsed_body['error']
+  end
+
+  test 'create returns error when email is invalid' do
+    assert_no_difference(['User.count', 'MagicLink.count']) do
+      post magic_links_url, params: { email: 'not-an-email' }, as: :json
+    end
+
+    assert_response :unprocessable_entity
+    assert_equal 'invalid_email', response.parsed_body['error']
   end
 
   test 'show consumes token and redirects to frontend' do
