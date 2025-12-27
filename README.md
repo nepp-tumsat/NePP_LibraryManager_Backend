@@ -24,7 +24,7 @@ git でこのリポジトリをクローン後、Docker を立ち上げ、VSCode
 
 bin/setup (初回実行時のみ必須)
 
-rails s
+rails s -b 0.0.0.0 -p 3000 (バインドなしで実行しようとするとリクエストがDevContainerに届きません)
 
 を順番に実行してください
 
@@ -33,6 +33,9 @@ rails s
 また、開発に rubocop という静的コード解析ツールを使用しています。
 
 コードに対して自動的に可読性、保守性を高めてくれるものなので、開発中に都度 bundle exec rubocop -A を使用してみてください
+
+- Rails: `http://localhost:3000`
+- MailHog: `http://localhost:8025`
 
 ## 工夫した点・苦労した点
 
