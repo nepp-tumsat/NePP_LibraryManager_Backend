@@ -15,22 +15,40 @@ class MagicLinksController < ApplicationController
   end
 
   def create
-    email = params.require(:email).to_s.strip.downcase
-    return render(json: { error: 'email_required' }, status: :unprocessable_entity) if email.blank?
+    email = normalized_email
+    return render_email_required if email.blank?
 
-    user = User.find_or_create_by!(email: email)
-    raw_token = MagicLink.issue_for(user)
-    MagicLinkMailer.login_link(user:, token: raw_token).deliver_now
-
+    send_login_link!(email)
     head :accepted
   rescue ActionController::ParameterMissing
-    render json: { error: 'email_required' }, status: :unprocessable_entity
+    render_email_required
+  rescue ActiveRecord::RecordInvalid => e
+    render_invalid_email(e)
   end
 
   private
 
   def consume_user
     MagicLink.consume!(params[:id].to_s)
+  end
+
+  def normalized_email
+    params.require(:email).to_s.strip.downcase
+  end
+
+  def send_login_link!(email)
+    user = User.find_or_create_by!(email: email)
+    raw_token = MagicLink.issue_for(user)
+    MagicLinkMailer.login_link(user:, token: raw_token).deliver_now
+  end
+
+  def render_email_required
+    render json: { error: 'email_required' }, status: :unprocessable_entity
+  end
+
+  def render_invalid_email(error)
+    render json: { error: 'invalid_email', details: error.record.errors.full_messages },
+           status: :unprocessable_entity
   end
 
   def login_user!(user)

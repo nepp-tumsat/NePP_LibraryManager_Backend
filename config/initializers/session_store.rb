@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'uri'
+
 cors_origins = ENV['FRONTEND_URL'].to_s.split(',').map(&:strip).reject(&:empty?)
 
 cookie_domain =
@@ -14,8 +16,6 @@ cookie_domain =
 
     hosts.first if hosts.size == 1
   end
-
-require 'uri'
 
 Rails.application.config.session_store :cookie_store,
                                        key: '_app_session',

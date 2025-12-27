@@ -13,10 +13,4 @@ class SessionsController < ApplicationController
     reset_session
     head :no_content
   end
-
-  private
-
-  def failure_url
-    ENV.fetch('FRONTEND_AUTH_FAILURE_URL', '/')
-  end
 end
