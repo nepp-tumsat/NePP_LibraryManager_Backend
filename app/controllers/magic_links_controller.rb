@@ -47,8 +47,8 @@ class MagicLinksController < ApplicationController
   end
 
   def render_invalid_email(error)
-    render json: { error: 'invalid_email', details: error.record.errors.full_messages },
-           status: :unprocessable_entity
+    Rails.logger.info("[magic_link] invalid_email #{error.record.errors.full_messages.join(', ')}")
+    render json: { error: 'invalid_email' }, status: :unprocessable_entity
   end
 
   def login_user!(user)
