@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  token_digest: <%= MagicLink.digest('fixture-token-one') %>
+  expires_at: 2025-12-27 01:28:05
+  used_at: 2025-12-27 01:28:05
+
+two:
+  user: two
+  token_digest: <%= MagicLink.digest('fixture-token-two') %>
+  expires_at: 2025-12-27 01:28:05
+  used_at: 2025-12-27 01:28:05
