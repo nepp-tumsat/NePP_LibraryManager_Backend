@@ -13,12 +13,15 @@ services:
       timeout: 3s
       retries: 10
 
-  web:
+  app:
     build:
       context: ..
       dockerfile: .devcontainer/Dockerfile
     env_file:
       - ../.env
+    environment:
+      MAILHOG_HOST: mailhog
+      MAILHOG_PORT: 1025
     volumes:
       - ..:/workspaces/rails_app:cached
     working_dir: /workspaces/rails_app
@@ -28,6 +31,14 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      mailhog:
+        condition: service_started
+
+  mailhog:
+    image: mailhog/mailhog:v1.0.1
+    ports:
+      - "1025:1025"
+      - "8025:8025"
 
 volumes:
   db-store:
