@@ -31,3 +31,6 @@
 
 en:
   hello: "Hello world"
+  mailers:
+    magic_link:
+      subject: "Your sign-in link"
