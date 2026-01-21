@@ -24,7 +24,7 @@ git でこのリポジトリをクローン後、Docker を立ち上げ、VSCode
 
 bin/setup (初回実行時のみ必須)
 
-rails s -b 0.0.0.0 -p 3000 (バインドを指定せずに実行するとリクエストがDevContainerに届きません)
+rails s -b 0.0.0.0 -p 3001 (バインドを指定せずに実行するとリクエストがDevContainerに届きません)
 
 を順番に実行してください
 

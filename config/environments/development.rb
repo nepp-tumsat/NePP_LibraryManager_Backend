@@ -49,7 +49,7 @@ Rails.application.configure do
   }
   config.action_mailer.default_url_options = {
     host: ENV.fetch('APP_HOST', 'localhost'),
-    port: ENV.fetch('APP_PORT', 3000)
+    port: ENV.fetch('APP_PORT', 3001)
   }
 
   # Print deprecation notices to the Rails logger.
@@ -82,10 +82,10 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   # Allow requests from our preview domain.
-  pf_host = "#{ENV.fetch('CODESPACE_NAME', nil)}-3000.#{pf_domain}"
+  pf_host = "#{ENV.fetch('CODESPACE_NAME', nil)}-3001.#{pf_domain}"
   config.hosts << pf_host
-  config.hosts << 'localhost:3000'
+  config.hosts << 'localhost:3001'
 
-  config.action_cable.allowed_request_origins = ["https://#{pf_host}", 'http://localhost:3000']
+  config.action_cable.allowed_request_origins = ["https://#{pf_host}", 'http://localhost:3001']
 end
 # rubocop:enable Metrics/BlockLength

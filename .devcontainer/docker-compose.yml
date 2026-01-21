@@ -27,7 +27,7 @@ services:
     working_dir: /workspaces/rails_app
     command: sleep infinity
     ports:
-      - "3001:3000"
+      - "3001:3001"
     depends_on:
       db:
         condition: service_healthy
@@ -38,7 +38,7 @@ services:
     image: mailhog/mailhog:v1.0.1
     ports:
       - "1026:1025"
-      - "8026:8025"
+      - "8026:8026"
 
 volumes:
   db-store:
