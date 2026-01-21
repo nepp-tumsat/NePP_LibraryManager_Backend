@@ -34,8 +34,22 @@ rails s -b 0.0.0.0 -p 3000 (バインドを指定せずに実行するとリク�
 
 コードに対して自動的に可読性、保守性を高めてくれるものなので、開発中に都度 bundle exec rubocop -A を使用してみてください
 
-- Rails: `http://localhost:3000`
-- MailHog: `http://localhost:8025`
+- Rails: `http://localhost:3001`
+- MailHog: `http://localhost:8026`
+- MailHog SMTP: `localhost:1026`
+
+## マジックリンク認証
+
+- `POST /magic_links` に email を送るとログインリンクを送信します
+- メールのURLは `MAGIC_LINK_URL_BASE` + `/magic_links/:token`
+- `GET /magic_links/:token` でセッションを作成し、`FRONTEND_URL` にリダイレクトします
+
+### 関連する環境変数
+
+- `FRONTEND_URL`（production では必須・CORS/リダイレクト/セッションに使用）
+- `MAGIC_LINK_URL_BASE`（メールに埋め込むURLのベース）
+- `SENDGRID_API_KEY` (メール送信に使用する)
+
 
 ## 工夫した点・苦労した点
 
